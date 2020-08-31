@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>myMusicianJournal - Main screen</title>
+{% endblock %}
+
+{% block body %}
+<div class="nav">
+    {%- if request.path in ('/', '/index', '/login') -%}
+    <div class="current_page">Summary</div>
+    {%- else -%}
+    <a href="{{ url_for('index') }}">Summary</a>
+    {% endif %}
+    
+    {%- if request.path == '/edit_categories' -%}
+    <div class="current_page">Categories</div>
+    {%- else -%}
+    <a href="{{ url_for('categories') }}">Categories</a>
+    {% endif %}
+
+    {%- if request.path == '/edit_exercises' -%}
+    <div class="current_page">Excercises</div>
+    {%- else -%}
+    <a href="{{ url_for('edit_exercises') }}">Excercises</a>
+    {% endif %}
+
+    {%- if request.path == '/practice' -%}
+    <div class="current_page">Practice</div>
+    {%- else -%}
+    <a href="{{ url_for('practice') }}">Practice</a>
+    {% endif %}
+    
+    {%- if current_user.is_authenticated -%}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="user_info">
+            Logged in as {{ current_user.email }}.
+        </div>
+    {% endif %}
+</div>
+
+{%- if update_msg -%}
+<div class="banner">
+{{ update_msg }}
+</div>
+{% endif %}
+{% block content %}{% endblock %}
+
+{% endblock %}

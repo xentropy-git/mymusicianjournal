@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>MyMusicianJournal - Register</title>
+
+{% endblock %}
+
+{% block body %}
+
+{%- if update_msg -%}
+<i> {{ update_msg }} </i> <br>
+{% endif %}
+
+{%- if success -%}
+New user account created.<br>
+You may <a href="{{ url_for('login') }}"">login</a> now<br>
+
+{%- elif fail -%}
+Failed to create user account.
+
+
+{%- else -%}
+Complete this form and click submit to register for an account.
+
+<div class="container">
+    <div class="row">
+        <h3>Login</h3>
+    </div>
+    <form action='register' method='POST'>
+        <div class="row">
+            <div class="col-25">
+                <label>Email</label>
+            </div>
+            <div class="col-75">
+                <input type='text' name='email' id='email' placeholder='email'/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Password</label>
+            </div>
+            <div class="col-75">
+                <input type='password' name='password' id='password' placeholder='password'/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Retype Password</label>
+            </div>
+            <div class="col-75">
+                <input type='password' name='password2' id='password' placeholder='password'/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock %}

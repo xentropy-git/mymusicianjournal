@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>myMusicianJournal - Categories</title>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Category ID</th><th>Category Name</th>
+    </tr>
+    {% for category in category_list %}
+    <tr>
+        <td>{{ category[0] }}</td><td>{{ category[2] }}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+
+<div class="container">
+    <div class="row">
+        <h3>New Category</h3>
+    </div>
+    <form action='edit_categories' method='POST'>
+        <div class="row">
+            <div class="col-25">
+                <label>Category Name</label>
+            </div>
+            <div class="col-75">
+                <input type='text' name='category_name' id='category_name' placeholder='category name'/>
+            </div>
+        </div>
+        
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

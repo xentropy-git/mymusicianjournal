@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>myMusicianJournal - Exercises</title>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Key</th><th>Name</th><th>Category</th><th>UoM</th><th>URL</th>
+    </tr>
+    {% for exercise in exercise_list %}
+    <tr>
+        <td>{{ exercise[0] }}</td><td>{{ exercise[3] }}</td>
+        <td>{{ exercise[7] }}</td><td>{{ exercise[6] }}</td>
+        <td>{{ exercise[4] }}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+
+
+<div class="container">
+    <div class="row">
+        <h3>New Exercise</h3>
+    </div>
+    <form action='edit_exercises' method='POST'>
+        <div class="row">
+            <div class="col-25">
+                <label>Exercise Name</label>
+            </div>
+            <div class="col-75">
+                <input type='text' name='name' id='name' placeholder='exercise name'/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Category</label>
+            </div>
+            <div class="col-75">
+                <select id="category_id" name="category_id" size="1">
+                    {% for category in category_list %}
+                    <option value="{{ category[0] }}">{{ category[2] }}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Source URL</label>
+            </div>
+            <div class="col-75">
+                <input type='text' name='source_url' id='source_url' placeholder='url to sheet music or other info'/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Unit of Measurement</label>
+            </div>
+            <div class="col-75">
+                <select id="uom" name="uom" size="3">
+                    <option value="bpm" selected="selected">BPM</option>
+                    <option value="stars">1 to 5 stars</option>
+                    <option value="seconds">Seconds</option>
+                  </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label>Notes</label>
+            </div>
+            <div class="col-75">
+                <textarea id="notes" name="notes" rows="4" cols="50"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

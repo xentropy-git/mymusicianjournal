@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block head %}
+<title>myMusicianJournal - Summary</title>
+<script src="{{url_for('static', filename='js/jquery-3.5.1.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/Chart.min.js')}}"></script>
+   
+    
+{% endblock %}
+
+{% block content %}
+<div class = "chart_container">
+<canvas id="focusChart" width="256" height="256"></canvas>
+</div>
+<table>
+    <tr><th colspan = 6>Practice Log</th></tr>
+    <tr>
+        <th>Timestamp</th><th>Exercise Name</th><th>Category</th><th>Achievement</th><th>UoM</th><th>Duration</th>
+        
+    </tr>
+    {% for session in recent_sessions %}
+    <tr>
+        <td>{{ session[3] }}</td>
+        <td>{{ session[7] }}</td>
+        <td>{{ session[8] }}</td>
+        <td>{{ session[5] }}</td>
+        <td>{{ session[6] }}</td>
+        <td>{{ session[9] }}</td>
+        
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+
+<script type="text/javascript">
+    
+   
+$.getJSON( "/api?action=get_piechart_data&&id=2", function( jsonData ) {
+    var radarChart = new Chart(focusChart, {
+    type: 'radar',
+    data: jsonData,
+    options: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    fontColor: 'white',
+                    fontSize: 32
+                }
+            },
+            scale: {
+                pointLabels: {
+                    fontSize: 32
+                }
+            }
+        }
+    });
+
+});
+
+
+
+  </script>
+
+{% endblock %}
